@@ -8,22 +8,21 @@
 {{> navbar}}
 
 <!-- Header -->
-<header class="w3-container w3-yellow w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo">FORM</h1>
+<header class="w3-container w3-green w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">WEATHER RESULT</h1>
   <p class="w3-xlarge">Template by w3.css</p>
-  
+
 </header>
 
 <!-- First Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-twothird w3-center">
-      <form action="/" method="post">
-        <input name="address" type="text" placeholder="Enter address..." />
-        <p>
-          <input type="submit" value="send" formaction="/getweather" />
-        </p>
-      </form>
+      <h5>
+        <p>Address: {{address}}  </p>
+        <p>Summary: {{summary}}  </p>
+        <p>Temperature: {{temperature}}  </p>
+      </h5>
     </div>
 
     <div class="w3-third w3-center">
