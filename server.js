@@ -10,6 +10,19 @@ server.use(bodyParser.urlencoded({extended: true} ));
 server.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
+var weatherdata;
+
+hbs.registerHelper('list', (items, options) => {
+  items = weatherdata;
+  var out = "<tr> <th>Address</th> <th>Summary</th> <th>Temp</th> </tr>"
+  const length = items.length;
+  for(var i=0; i<length; i++) {
+    out = out + options.fn(items[i]);
+  }
+
+  return out;
+});
+
 server.get('/', (req,res) => {
   res.render('main.hbs');
 });
@@ -22,13 +35,23 @@ server.get('/result', (req,res) => {
   res.render('result.hbs');
 });
 
-server.get('/historical', (req,res) => {
+server.get('/historical', (req, res) => {
   filemgr.getAllData().then((result) => {
-    res.render('historical.hbs', result);
-  }).catch(errorMessage) => {
+    weatherdata = result;
+    res.render('historical.hbs');
+  }).catch((errorMessage) => {
     console.log(errorMessage);
-  })
-})
+  });
+});
+
+server.post('/delete', (req,res) =>{
+  filemgr.deleteAll().then((result) => {
+    weatherdata = result;
+    res.render('historical.hbs');
+  }).catch((errorMessage) => {
+    console.log(errorMessage);
+  });
+});
 
 server.post('/form', (req,res) => {
   res.render('form.hbs');
