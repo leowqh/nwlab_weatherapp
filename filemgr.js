@@ -2,7 +2,7 @@ const {MongoClient} = require('mongodb');
 const fs = MongoClient;
 
 const database = 'mongodb://localhost:27017';
-
+const database = 'mongodb://lab123:lab123@ds241570.mlab.com:41570/weather_app';
 const saveData = (newdata) => {
   return new Promise((resolve, reject) => {
     MongoClient.connect(database,{useNewUrlParser: true}, (err, client) => {
